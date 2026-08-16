@@ -1,6 +1,11 @@
 [
-    {
-        "id":"1",
-        "path":"./images/Enable.png"
-    }
+  {
+    "id": "1",
+    "path": "https://raw.githubusercontent.com/PhongNguyenxDEV/PhongCon/main/Images/Enable.png"
+  },
+  {
+    "id": "2",
+    "path": "https://raw.githubusercontent.com/PhongNguyenxDEV/PhongCon/main/Images/Disable.png"
+  }
+  
 ]

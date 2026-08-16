@@ -3,11 +3,13 @@ import http from 'http';
 import Textdata from './Config/text.json' with { type: 'json' };
 import Imagedata from './Config/image.json' with { type: 'json' };
 import dotenv from 'dotenv';
+import * as command from "./Srcs/command.js";
 dotenv.config();
 
 let Lasted_Mes = "";
 let chat_id = "";
 let MODE = "NULL";
+let enabled = false;
 
 const PORT = process.env.PORT || 8000;
 const KEY = process.env.ZALO_KEY;
@@ -36,13 +38,27 @@ while(true){
     //dem 1s
     await new Promise(resolve => setTimeout(resolve, 1000));
     //kich hoat
-    if (Lasted_Mes == "/on"){
-        let MODE = "sendPhoto"
-        const entrypoint = `https://bot-api.zaloplatforms.com/bot${ZL_TOKEN}/${MODE}`;
-        const text = Textdata.find(x => x.id === "1").text;
-        const image = Imagedata.find(x => x.id === "1").path;
-        const response = await axios.post(entrypoint, {chat_id: chat_id,parse_mode:"HTML",caption:text,photo: image,  
-        });
-        Lasted_Mes = ""; 
+    if (enabled == false){
+        if (Lasted_Mes == "/on"){
+            await command.Enable(chat_id,ZL_TOKEN);
+            enabled=true;
+            Lasted_Mes="";
+        } 
+    } else {
+        if (Lasted_Mes == "/off"){
+            await command.Disable(chat_id,ZL_TOKEN);
+            enabled = false;
+            Lasted_Mes="";
+        }
     }
+
+
+
+
+
+
+
+
+
+
 }
