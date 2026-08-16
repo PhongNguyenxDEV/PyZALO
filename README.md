@@ -46,33 +46,34 @@ Sau đó nhấn **Tạo Bot** và làm theo hướng dẫn của Zalo.
 
 ### Cài đặt thư viện
 
-```bash
 pip install PyZALO
 
-```bash
-Tất cả các thư viện phụ thuộc sẽ được tự động cài đặt!
-📦 Dependencies
-PyZALO tự động cài các thư viện sau:
+### 🐛 Báo lỗi và đóng góp
+Nếu bạn tìm thấy lỗi hoặc muốn đóng góp:
 
-Thư viện	Phiên bản	Mục đích
-requests	>=2.28.0	Gọi API HTTP
-websocket-client	>=1.4.0	Kết nối WebSocket
-pillow	>=9.0.0	Xử lý ảnh
-qrcode	>=7.4.0	Tạo QR code
-python-dotenv	>=1.0.0	Quản lý biến môi trường
-aiohttp	>=3.8.0	HTTP async
-pydantic	>=2.0.0	Validation dữ liệu
-loguru	>=0.7.0	Logging đẹp
-🤝 Đóng góp
-Mọi đóng góp đều được chào đón! Vui lòng tạo issue hoặc pull request.
+Fork repository
 
-💖 Lời cảm ơn
-YÊU BẠN YÊU TÔI YÊU MỌI NGƯỜI ❤️
+Tạo branch mới: git checkout -b feature/amazing-feature
 
-Btw, hãy follow tôi trên TikTok nhé! 😘
+Commit changes: git commit -m 'Add amazing feature'
 
-👤 Tác giả
-PhongVeChai (PhongNguyenxDEV)
+Push lên branch: git push origin feature/amazing-feature
 
-📄 License
-MIT License - Xem file LICENSE để biết thêm chi tiết.
+Tạo Pull Request
+
+Hoặc tạo issue tại: https://github.com/PhongNguyenxDEV/PyZALO/issues
+
+### 🙏 Cảm ơn
+Cảm ơn bạn đã sử dụng PyZALO! Mọi đóng góp và phản hồi đều được chào đón. ❤️
+
+### 📱 Kết nối với tác giả
+TikTok: @PhongWeboo~~
+
+GitHub: PhongNguyenxDEV
+
+Email: aimabtdcdungko@gmail.com
+
+### 📄 License
+Dự án được phân phối dưới giấy phép MIT. Xem file LICENSE để biết thêm chi tiết.
+
+#### Made by PhongVeChai
