@@ -1,89 +1,147 @@
-import axios from 'axios';
+// ==================== index.js ====================
 import http from 'http';
-import Textdata from './Config/text.json' with { type: 'json' };
-import Imagedata from './Config/image.json' with { type: 'json' };
 import dotenv from 'dotenv';
-import * as command from "./Srcs/command.js";
+import * as command from './srcs/command.js';
+import { clearLoginInterval, closeBrowser } from './srcs/browser.js';
+
 dotenv.config();
 
-let Lasted_Mes = "";
-let chat_id = "";
-let MODE = "NULL";
-let enabled = false;
-
 const PORT = process.env.PORT || 8000;
-const KEY = process.env.ZALO_KEY;
-const URL = process.env.WEBHOOK;
 const ZL_TOKEN = process.env.ZALO_TOKEN;
-const server=http.createServer((req,res)=>{if(req.method==='POST'&&req.url==='/webhook'){let body='';req.on('data',chunk=>body+=chunk);req.on('end',()=>{try{const webhookData=JSON.parse(body);Lasted_Mes=webhookData.message?.text||webhookData.message?.content||'';chat_id=webhookData.message?.chat?.id||webhookData.message?.from?.id||webhookData.sender?.id;res.writeHead(200);res.end('OK')}catch(e){console.error(e);res.writeHead(200);res.end('OK')}});return}res.writeHead(200);res.end('HI')});
 
-if (!ZL_TOKEN) {console.error('Can phai co ZL_TOKEN trong .env');process.exit(1);}
-if (!KEY) {console.error('Can phai co ZL_KEY trong .env');process.exit(1);}
-if (!URL) {console.error('Can phai co WEBHOOK trong .env');process.exit(1);}
+if (!ZL_TOKEN) { console.error('Need ZALO_TOKEN in .env'); process.exit(1); }
 
-//mo sever memaybeo
-server.listen(PORT, () => {console.log(`\n\nServer đang chay tai: http://localhost:${PORT} \n\n`);});
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {console.error(`Port:  ${PORT} da dc su dung`);} 
-  else {console.error('Loi server:', err);}});
+let Lasted_Mes = "", chat_id = "";
+let enabled = false;
+let processing = false;
 
-//getme btw toi yeu ban (in data cua con bot)
-//try {let MODE = "getMe";const entrypoint = `https://bot-api.zaloplatforms.com/bot${ZL_TOKEN}/${MODE}`;const response = await axios.post(entrypoint, {});console.log('Data:', response.data);} catch (error) {console.error('Error: ', error.message);if (error.response) {console.error('Chi tiet:', error.response.data);}}
-//dat webhook 
-//try{let MODE = "setWebhook";const entrypoint = `https://bot-api.zaloplatforms.com/bot${ZL_TOKEN}/${MODE}`;const response = await axios.post(entrypoint, {url: URL,secret_token: KEY});console.log('Webhook: ',response.data);} catch(error){console.error('Error: ', error.message);if (error.response){console.error('Chi tiet: ', error.response.data);}}
-//try{let MODE = "testWebhook";const entrypoint = `https://bot-api.zaloplatforms.com/bot${ZL_TOKEN}/${MODE}`;const response = await axios.post(entrypoint, {});console.log("Testing: ", response.data);} catch(error){console.log('Error:', error.message);if (error.response){console.error('Chi tiet: ', error.response.data);}};
-
-
-while(true){
-    //dem 1s
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    //kich hoat
-    if (enabled == false){
-        if (Lasted_Mes == "/on"){
-            await command.Enable(chat_id,ZL_TOKEN);
-            enabled=true;
-            Lasted_Mes="";
-        } 
-        if (Lasted_Mes == "/help"){
-            await command.Help_WO(chat_id,ZL_TOKEN);
-            Lasted_Mes="";
-        } 
-    } else {
-        if (Lasted_Mes == "/off"){
-            await command.Disable(chat_id,ZL_TOKEN);
-            enabled = false;
-            Lasted_Mes="";
-        }
-        if (Lasted_Mes == "/help"){
-            await command.Help(chat_id,ZL_TOKEN);
-            Lasted_Mes="";
-        } 
-        if (Lasted_Mes == "/dangnhap"){
-            await command.Login_Help(chat_id,ZL_TOKEN)
-            Lasted_Mes="";
-        }
-        if (Lasted_Mes == "/dangnhap_cookie"){
-            await command.Login_Cookie(chat_id,ZL_TOKEN)
-            Lasted_Mes="";
-        }
-        if (Lasted_Mes.startsWith("/dangnhap_bth")){
-            await command.Login_Nor(chat_id,ZL_TOKEN,Lasted_Mes)
-            Lasted_Mes="";
-        }
-        if (Lasted_Mes.startsWith("/chuoi")){
-            await command.Streak(chat_id,ZL_TOKEN,Lasted_Mes)
-            Lasted_Mes="";
-        }
+const server = http.createServer((req, res) => {
+  if (req.method === 'POST' && req.url === '/webhook') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const data = JSON.parse(body);
+        const message = data.message?.text || data.message?.content || '';
+        const sender = data.message?.chat?.id || data.message?.from?.id || data.sender?.id;
         
+        if (message && sender) {
+          Lasted_Mes = message.trim();
+          chat_id = sender;
+          console.log(`📩 Received: "${Lasted_Mes}" from ${chat_id}`);
+        }
+        res.writeHead(200);
+        res.end('OK');
+      } catch (e) { 
+        console.error('Webhook error:', e);
+        res.writeHead(200); 
+        res.end('OK'); 
+      }
+    });
+    return;
+  }
+  res.writeHead(200);
+  res.end('HI');
+});
+
+server.listen(PORT, () => console.log(`🚀 Server running: http://localhost:${PORT}`));
+
+// Main loop
+while (true) {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  if (!Lasted_Mes || Lasted_Mes === '') continue;
+  if (processing) continue;
+  
+  processing = true;
+  const msg = Lasted_Mes;
+  const chat = chat_id;
+  
+  console.log(`🔄 Processing: "${msg}", enabled: ${enabled}`);
+  
+  try {
+    // ALWAYS handle /on and /help regardless of enabled state
+    if (msg === '/on') {
+      console.log('✅ Executing /on command');
+      await command.Enable(chat);
+      enabled = true;
+      Lasted_Mes = '';
+      processing = false;
+      continue;
     }
-
-
-
-
-
-
-
-
-
-
+    
+    if (msg === '/help') {
+      console.log('✅ Executing /help command');
+      await command.Help(chat, enabled);
+      Lasted_Mes = '';
+      processing = false;
+      continue;
+    }
+    
+    // Only process other commands if enabled
+    if (enabled) {
+      if (msg === '/off') {
+        console.log('✅ Executing /off command');
+        await command.Disable(chat);
+        enabled = false;
+        clearLoginInterval();
+        await closeBrowser();
+        Lasted_Mes = '';
+        processing = false;
+        continue;
+      }
+      
+      if (msg === '/status') {
+        console.log('✅ Executing /status command');
+        await command.StatusCommand(chat);
+        Lasted_Mes = '';
+        processing = false;
+        continue;
+      }
+      
+      if (msg === '/logout') {
+        console.log('✅ Executing /logout command');
+        await command.LogoutCommand(chat);
+        Lasted_Mes = '';
+        processing = false;
+        continue;
+      }
+      
+      if (msg === '/login') {
+        console.log('✅ Executing /login command');
+        await command.LoginCommand(chat);
+        Lasted_Mes = '';
+        processing = false;
+        continue;
+      }
+      
+      if (msg.startsWith('/chuoi')) {
+        console.log('✅ Executing /chuoi command');
+        const parts = msg.trim().split(/\s+/);
+        const targetUser = parts.length > 1 ? parts[1] : '';
+        await command.StreakCommand(chat, targetUser, process.env.STREAK_URL);
+        Lasted_Mes = '';
+        processing = false;
+        continue;
+      }
+      
+      // Unknown command when enabled
+      console.log('⚠️ Unknown command:', msg);
+      await command.Error(chat);
+    } else {
+      // Bot disabled, reject other commands
+      if (msg !== '/on' && msg !== '/help') {
+        console.log(`⚠️ Bot disabled, rejecting: "${msg}"`);
+        await command.Error(chat);
+      }
+    }
+  } catch (error) {
+    console.error('❌ Command error:', error);
+    try {
+      await command.Error(chat);
+    } catch (e) {}
+  }
+  
+  Lasted_Mes = '';
+  processing = false;
 }
