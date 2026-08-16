@@ -44,12 +44,20 @@ while(true){
             enabled=true;
             Lasted_Mes="";
         } 
+        if (Lasted_Mes == "/help"){
+            await command.Help_WO(chat_id,ZL_TOKEN);
+            Lasted_Mes="";
+        } 
     } else {
         if (Lasted_Mes == "/off"){
             await command.Disable(chat_id,ZL_TOKEN);
             enabled = false;
             Lasted_Mes="";
         }
+        if (Lasted_Mes == "/help"){
+            await command.Help(chat_id,ZL_TOKEN);
+            Lasted_Mes="";
+        } 
     }
 
 

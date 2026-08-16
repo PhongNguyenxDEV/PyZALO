@@ -1,11 +1,19 @@
 [
   {
     "id": "1",
-    "path": "https://raw.githubusercontent.com/PhongNguyenxDEV/PhongCon/main/Images/Enable.png"
+    "path": "https://raw.githubusercontent.com/PhongNguyenxDEV/PhongCon/main/Image/Enable.png"
   },
   {
     "id": "2",
-    "path": "https://raw.githubusercontent.com/PhongNguyenxDEV/PhongCon/main/Images/Disable.png"
-  }
+    "path": "https://raw.githubusercontent.com/PhongNguyenxDEV/PhongCon/main/Image/Disable.png"
+  },
+  {
+    "id": "3",
+    "path": "https://raw.githubusercontent.com/PhongNguyenxDEV/PhongCon/main/Image/Help.png"
+  },
   
+  {
+    "id": "4",
+    "path": "https://raw.githubusercontent.com/PhongNguyenxDEV/PhongCon/main/Image/Help.png"
+  }
 ]

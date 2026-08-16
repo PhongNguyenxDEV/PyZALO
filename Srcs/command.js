@@ -17,7 +17,20 @@ export async function Disable(chat_id, token, enable) {
     await axios.post(entrypoint, {chat_id: chat_id,caption: text,photo: image});
 }
 
-
+export async function Help_WO(chat_id, token, enable) {
+    const MODE = "sendPhoto";
+    const entrypoint = `https://bot-api.zaloplatforms.com/bot${token}/${MODE}`;
+    const text = Textdata.find(x => x.id === "3").text;
+    const image = Imagedata.find(x => x.id === "3").path;
+    await axios.post(entrypoint, {chat_id: chat_id,caption: text,photo: image});
+}
+export async function Help(chat_id, token, enable) {
+    const MODE = "sendPhoto";
+    const entrypoint = `https://bot-api.zaloplatforms.com/bot${token}/${MODE}`;
+    const text = Textdata.find(x => x.id === "4").text;
+    const image = Imagedata.find(x => x.id === "4").path;
+    await axios.post(entrypoint, {chat_id: chat_id,caption: text,photo: image});
+}
 
 
 

@@ -1,10 +1,20 @@
 [
     {
         "id":"1",
-        "text":"Chào đại ka\n Đại ka đã gọi e đk. Đúng thì ok k thì kệ\nBtw em là PhongCon.\n Hân hạnh đc đồng hành với Đại ka"
+        "text":"Chào đại ka\n Đại ka đã gọi e đk. Đúng thì ok k thì kệ\nBtw em là PhongCon.\n Hân hạnh đc đồng hành với Đại ka."
     },
     {
         "id":"2",
-        "text":"Bye bye đại ka nha~~\n Chúc đại ka 1 ngày tốt lành"
+        "text":"Bye bye đại ka nha~~\n Chúc đại ka 1 ngày tốt lành."
+    },
+    
+    {
+        "id":"3",
+        "text":"Đại ka chưa bật bot thì s chs đc Đại ka\nHint: sử dụng /on để bật và /off để tắt."
+    },
+    
+    {
+        "id":"4",
+        "text":"__Trợ giúp__\n\n*/help:trợ giúp     */on:bật bot\n*/off:tắt bot"
     }
 ]
