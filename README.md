@@ -43,6 +43,7 @@ Sau đó nhấn **Tạo Bot** và làm theo hướng dẫn của Zalo.
 
 ### Yêu cầu hệ thống
 - Python >= 3.9
+- Request >= 2.28.0
 
 ### Cài đặt thư viện
 
