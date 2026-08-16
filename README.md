@@ -2,35 +2,89 @@
 
 ![Logo](https://raw.githubusercontent.com/PhongNguyenxDEV/PyZALO/refs/heads/main/assets/Logo.png)
 
-là 1 thư viện mã nguồn mở để làm bot OA ZALO
+**PyZALO** là thư viện mã nguồn mở giúp bạn tạo Bot OA ZALO một cách dễ dàng bằng Python.
 
-bạn muốn sd python thay vì node.js để lập trình bot zalo
-nhưng nó lại quá dài và bạn mỏi tay?
+---
 
-Đừng lo vì đây chính là giải pháp tối ưu nhất dành cho bạn
+## 🎯 Tại sao chọn PyZALO?
 
-## được viết 100% bằng python nên tốc độ khá chậm (xin lỗi vì sự bất tiện này)
+- ❤️ **Yêu Python, ghét Node.js** - Viết bot Zalo bằng Python thay vì JavaScript
+- 😫 **Mỏi tay?** - PyZALO rút gọn code, không cần viết dài dòng
+- 🚀 **Tối ưu** - Giải pháp đơn giản nhất cho Python developers
 
-## Document chính chủ (vì bản python này chỉ là support chứ nó vẫn là chính chủ)
+---
 
-https://bot.zaloplatforms.com/docs/
+## ⚠️ Lưu ý
 
-##  Cách mở OA ZALO bot
-quét mã qr sau
-![qrcode](https://raw.githubusercontent.com/PhongNguyenxDEV/PyZALO/refs/heads/main/assets/OA_qrcode.jpg)
+> **Thư viện được viết 100% bằng Python nên tốc độ có thể chậm hơn so với bản chính thức.**
+> 
+> **Rất xin lỗi vì sự bất tiện này!** 🙏
 
-sau đó nhấn tạo bot rồi làm theo các bước chỉ dẫn của zalo
+---
 
-#### Cài bằng cách sử dụng lệnh:
+## 📖 Tài liệu tham khảo
 
+Tài liệu chính thức của Zalo OA Bot:
+👉 [https://bot.zaloplatforms.com/docs/](https://bot.zaloplatforms.com/docs/)
+
+---
+
+## 🔧 Cách mở OA ZALO Bot
+
+Quét mã QR sau để tạo bot:
+
+![QR Code](https://raw.githubusercontent.com/PhongNguyenxDEV/PyZALO/refs/heads/main/assets/OA_qrcode.jpg)
+
+Sau đó nhấn **Tạo Bot** và làm theo hướng dẫn của Zalo.
+
+---
+
+## 💻 Cài đặt
+
+### Yêu cầu hệ thống
+- Python >= 3.9
+
+### Cài đặt thư viện
+
+```bash
 pip install PyZALO
+Tất cả các thư viện phụ thuộc sẽ được tự động cài đặt!
 
-### Cấu hình yêu cầu
+Cài đặt với các tính năng phát triển
+bash
+# Cài đặt với dependencies cho development
+pip install PyZALO[dev]
+🚀 Ví dụ nhanh
+python
+from pyzalo import ZaloBot
 
-python >= 3.9
+# Khởi tạo bot
+bot = ZaloBot(api_key="your_api_key")
 
-#### YÊU BẠN YÊU TÔI YÊU MỌI NGƯỜI
+# Gửi tin nhắn
+bot.send_message("Xin chào! Tôi là bot Zalo 🎉")
+📦 Dependencies
+PyZALO tự động cài các thư viện sau:
 
-btw hãy follow tôi trên tiktok
+Thư viện	Phiên bản	Mục đích
+requests	>=2.28.0	Gọi API HTTP
+websocket-client	>=1.4.0	Kết nối WebSocket
+pillow	>=9.0.0	Xử lý ảnh
+qrcode	>=7.4.0	Tạo QR code
+python-dotenv	>=1.0.0	Quản lý biến môi trường
+aiohttp	>=3.8.0	HTTP async
+pydantic	>=2.0.0	Validation dữ liệu
+loguru	>=0.7.0	Logging đẹp
+🤝 Đóng góp
+Mọi đóng góp đều được chào đón! Vui lòng tạo issue hoặc pull request.
 
-### được làm bởi PhongVeChai
+💖 Lời cảm ơn
+YÊU BẠN YÊU TÔI YÊU MỌI NGƯỜI ❤️
+
+Btw, hãy follow tôi trên TikTok nhé! 😘
+
+👤 Tác giả
+PhongVeChai (PhongNguyenxDEV)
+
+📄 License
+MIT License - Xem file LICENSE để biết thêm chi tiết.
