@@ -1,0 +1,1 @@
+from pyzalo import main
