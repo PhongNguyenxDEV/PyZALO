@@ -58,6 +58,18 @@ while(true){
             await command.Help(chat_id,ZL_TOKEN);
             Lasted_Mes="";
         } 
+        if (Lasted_Mes == "/dangnhap"){
+            await command.Login_Help(chat_id,ZL_TOKEN)
+            Lasted_Mes="";
+        }
+        if (Lasted_Mes == "/dangnhap_cookie"){
+            await command.Login_Cookie(chat_id,ZL_TOKEN)
+            Lasted_Mes="";
+        }
+        if (Lasted_Mes == "/dangnhap_bth"){
+            await command.Login_Nor(chat_id,ZL_TOKEN)
+            Lasted_Mes="";
+        }
     }
 
 
