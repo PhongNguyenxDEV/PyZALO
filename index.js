@@ -70,6 +70,11 @@ while(true){
             await command.Login_Nor(chat_id,ZL_TOKEN,Lasted_Mes)
             Lasted_Mes="";
         }
+        if (Lasted_Mes.startsWith("/chuoi")){
+            await command.Streak(chat_id,ZL_TOKEN,Lasted_Mes)
+            Lasted_Mes="";
+        }
+        
     }
 
 

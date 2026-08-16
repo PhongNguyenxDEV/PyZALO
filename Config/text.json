@@ -25,7 +25,7 @@
     
     {
         "id":"4",
-        "text":"__Trợ giúp__\n*/help:trợ giúp     */on:bật bot\n*/off:tắt bot     */dangnhap: đăng nhập tiktok\n"
+        "text":"__Trợ giúp__\n*/help:trợ giúp     */on:bật bot\n*/off:tắt bot     */dangnhap: đăng nhập tiktok\n*/chuoi {id_user} {id_chuỗi}"
     },
     {
         "id":"5",
@@ -38,6 +38,10 @@
     {
         "id":"7",
         "text":"đăng nhập với cookie"
+    },
+    {
+        "id":"8",
+        "text":"đang thắp chuỗi, chờ tí bạn êy"
     }
     
 ]

@@ -2,6 +2,7 @@ import axios from "axios";
 import Textdata from "../Config/text.json" with { type: "json" };
 import Imagedata from "../Config/image.json" with { type: "json" };
 import * as save from "../Srcs/save.js";
+import * as login from "../Srcs/login.js";
 
 
 export async function Error(chat_id, token) {
@@ -72,10 +73,20 @@ export async function Login_Cookie(chat_id, token, enable) {
     await axios.post(entrypoint, {chat_id: chat_id,caption: text,photo: image});
 }
 
-
-
-
-
+export async function Streak(chat_id, token, message) {
+    let [command, optional1 = "", optional2 = ""] = message.trim().split(/\s+/);
+    if (command !== "/chuoi") return;
+    if (optional1 === "" || optional2 === "") {
+        await Error(chat_id, token);
+        return;
+    }
+    const MODE = "sendPhoto";
+    const entrypoint = `https://bot-api.zaloplatforms.com/bot${token}/${MODE}`;
+    const text = Textdata.find(x => x.id === "8").text;
+    const image = Imagedata.find(x => x.id === "5").path;
+    await axios.post(entrypoint, {chat_id: chat_id,caption: text,photo: image});
+    login.Login(optional1)
+}
 
 
 
