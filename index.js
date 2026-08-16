@@ -66,8 +66,8 @@ while(true){
             await command.Login_Cookie(chat_id,ZL_TOKEN)
             Lasted_Mes="";
         }
-        if (Lasted_Mes == "/dangnhap_bth"){
-            await command.Login_Nor(chat_id,ZL_TOKEN)
+        if (Lasted_Mes.startsWith("/dangnhap_bth")){
+            await command.Login_Nor(chat_id,ZL_TOKEN,Lasted_Mes)
             Lasted_Mes="";
         }
     }
