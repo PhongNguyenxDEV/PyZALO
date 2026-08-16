@@ -48,21 +48,9 @@ Sau đó nhấn **Tạo Bot** và làm theo hướng dẫn của Zalo.
 
 ```bash
 pip install PyZALO
+
+```bash
 Tất cả các thư viện phụ thuộc sẽ được tự động cài đặt!
-
-Cài đặt với các tính năng phát triển
-bash
-# Cài đặt với dependencies cho development
-pip install PyZALO[dev]
-🚀 Ví dụ nhanh
-python
-from pyzalo import ZaloBot
-
-# Khởi tạo bot
-bot = ZaloBot(api_key="your_api_key")
-
-# Gửi tin nhắn
-bot.send_message("Xin chào! Tôi là bot Zalo 🎉")
 📦 Dependencies
 PyZALO tự động cài các thư viện sau:
 
