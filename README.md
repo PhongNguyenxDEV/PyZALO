@@ -1,6 +1,6 @@
 # PyZALO
 
-![Logo](./assets/logo.png)
+![Logo](https://raw.githubusercontent.com/PhongNguyenxDEV/PyZALO/refs/heads/main/assets/Logo.png)
 
 là 1 thư viện mã nguồn mở để làm bot OA ZALO
 
@@ -17,7 +17,7 @@ https://bot.zaloplatforms.com/docs/
 
 ##  Cách mở OA ZALO bot
 quét mã qr sau
-![qrcode](./assets/OA_qrcode.jpg)
+![qrcode](https://raw.githubusercontent.com/PhongNguyenxDEV/PyZALO/refs/heads/main/assets/OA_qrcode.jpg)
 
 sau đó nhấn tạo bot rồi làm theo các bước chỉ dẫn của zalo
 
